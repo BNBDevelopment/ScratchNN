@@ -131,6 +131,7 @@ class NeuralNet():
     hidden_layers = []
 
     def setAlpha(self, param):
+        print("Alpha: " + str(param))
         self.input_layer.setAlpha(param)
         self.output_layer.setAlpha(param)
         for layer in self.hidden_layers:
@@ -138,7 +139,6 @@ class NeuralNet():
 
 
     def __init__(self, numberInputNodes, numberOutputNodes, numberHiddenLayers, hiddenLayerSizes):
-        print("Creating Neural Net...")
         print("numberInputNodes: " + str(numberInputNodes) + "\tnumberOutputNodes: " + str(numberOutputNodes))
         print("numberHiddenLayers: " + str(numberHiddenLayers) + "\thiddenLayerSizes: " + str(hiddenLayerSizes))
 
@@ -186,15 +186,11 @@ class NeuralNet():
     def pushInputThroughModel(self, vectorOfInputImageValues):
         # TODO
         #print("PUSH Start Time: " + str(datetime.datetime.now()))
-        #print("Check 1: " + str(datetime.datetime.now()))
         self.input_layer.recieveInputLayerValues(vectorOfInputImageValues)
-        #print("Check 2: " + str(datetime.datetime.now()))
         self.input_layer.pushLayerValuesForward()
-        #print("Check 3: " + str(datetime.datetime.now()))
 
         for hiddenLayer in self.hidden_layers:
             hiddenLayer.pushLayerValuesForward()
-            #print("Check 4: " + str(datetime.datetime.now()))
 
         #print("PUSH End Time: " + str(datetime.datetime.now()))
         return self.output_layer.returnOutputValues()
